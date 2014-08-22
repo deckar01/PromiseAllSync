@@ -12,7 +12,13 @@ PromiseAllSync = {
         });
       }, emptyPromise.apply(PromiseClass))
         .catch(function(e) {
-          if(unfn) while(stack.length) unfn(stack.pop());
+          if(unfn) {
+            stack.reduceRight(function(promise, item) {
+              return promise.then(function() {
+                return unfn(item);
+              });
+            }, emptyPromise.apply(PromiseClass));
+          }
           return PromiseClass.reject(e);
         });
     }
