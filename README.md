@@ -8,7 +8,7 @@ Extend JavaScript promises with synchronous transactions.
 Setup:
 ------
 
-Extend your existing promise library with ```allSync```. Any library that supports ```Promise.resolve()``` (or ```Promise.when()```) and ```Promise.then()``` can be used.
+Extend your existing promise library with ```allSync```. Any library that supports ```Promise.resolve()``` (or ```Promise.when()```) and ```Promise.prototype.then()``` can be used.
 
 ```javascript
 PromiseAllSync.extend(Promise);
