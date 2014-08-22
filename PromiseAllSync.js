@@ -1,5 +1,6 @@
 PromiseAllSync = {
   extend: function(PromiseClass) {
+    var emptyPromise = PromiseClass.resolve || PromiseClass.when;
     PromiseClass.allSync = function(collection, fn, unfn) {
       var stack = [];
       return collection.reduce(function(promise, item) {
@@ -9,7 +10,7 @@ PromiseAllSync = {
             if(unfn) stack.push(item);
           });
         });
-      }, (PromiseClass.resolve || PromiseClass.when)())
+      }, emptyPromise.apply(PromiseClass))
         .catch(function(e) {
           if(unfn) while(stack.length) unfn(stack.pop());
           return PromiseClass.reject(e);
