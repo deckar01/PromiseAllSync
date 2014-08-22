@@ -9,7 +9,7 @@ PromiseAllSync = {
             if(unfn) stack.push(item);
           });
         });
-      }, PromiseClass.resolve())
+      }, (PromiseClass.resolve || PromiseClass.when)())
         .catch(function(e) {
           if(unfn) while(stack.length) unfn(stack.pop());
           return PromiseClass.reject(e);
